@@ -27,7 +27,7 @@ class DateRangeForm(forms.Form):
     def start_date(self):
         if self.is_valid():
             start = self.cleaned_data.get('%s_start' % self.field_name)
-            if start:
+            if start and isinstance(start, datetime):
                 start = datetime.combine(start, time.min)
 
                 if settings.USE_TZ:
@@ -38,7 +38,7 @@ class DateRangeForm(forms.Form):
     def end_date(self):
         if self.is_valid():
             end = self.cleaned_data.get('%s_end' % self.field_name)
-            if end:
+            if end and isinstance(end, datetime):
                 end = datetime.combine(end, time.max)
 
                 if settings.USE_TZ:
